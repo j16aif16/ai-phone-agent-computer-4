@@ -40,7 +40,7 @@ class ComputerBase extends DurableObject<Env> {
 // 没挂容器（免费部署）时这里什么都不做，零开销。
 class ComputerContainerHost extends withWorkspaceContainer(ComputerBase) {
   readonly containerBackend = (this.doCtx as { container?: unknown }).container
-    ? new CloudflareContainerBackend({
+    ? new ContainerBackend({
         container: () => this,
         workspace: { binding: "Computer", id: this.doCtx.id.toString() },
         // 容器内命令直连外网（真 Linux 模式的网络是全功能的，README 有说明）
